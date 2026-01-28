@@ -12,7 +12,4 @@ public class ApiDto {
     private String message;
     private LocalDateTime timestamp;
 
-    public ApiDto(){}
-    public ApiDto(int i, String message, LocalDateTime now) {
-    }
 }

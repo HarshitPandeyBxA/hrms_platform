@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler
     public ResponseEntity<ApiDto> handleEmployeeNotFound(EmployeeNotFoundException ex){
         ApiDto error = new ApiDto(
           404,
@@ -24,7 +23,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler
     public ResponseEntity<ApiDto> handleEmployeePersonalNotFound(EmployeePersonalNotFoundException ex){
         ApiDto error = new ApiDto(
                 404,

@@ -20,11 +20,11 @@ public class TimeExceptionHandler {
                 .body(ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGeneric(Exception ex) {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Internal Error");
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<String> handleGeneric(Exception ex) {
+//        return ResponseEntity
+//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body("Internal Error");
+//    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.hrms_platform_document.service;
 
+import com.example.EmployeeManagement.Exception.EmployeeNotFoundException;
 import com.example.EmployeeManagement.Model.Employee;
 import com.example.hrms_platform_document.util.ChecksumUtil;
 import com.example.EmployeeManagement.Repository.EmployeeRepository;
@@ -18,16 +19,12 @@ import java.time.LocalDateTime;
 @Service
 public class DocumentService {
 
-    @Autowired
     private DocumentRepository documentRepo;
 
-    @Autowired
     private DocumentVersionRepository versionRepo;
 
-    @Autowired
     private EmployeeRepository employeeRepo;
 
-    @Autowired
     private DocumentAuditService auditService;
 
     @Transactional
@@ -42,8 +39,7 @@ public class DocumentService {
 
 
         Employee emp = employeeRepo.findById(employeeId)
-                .orElseThrow(() ->
-                        new RuntimeException("Employee not found: " + employeeId)
+                .orElseThrow(() -> new EmployeeNotFoundException(employeeId)
                 );
 
         Document document = new Document();

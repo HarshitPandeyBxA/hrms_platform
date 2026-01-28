@@ -1,50 +1,47 @@
+
+
 package com.example.EmployeeManagement.Controller;
 
+import com.example.EmployeeManagement.DTO.EmployeeDTO;
 import com.example.EmployeeManagement.DTO.EmployeePersonalDTO;
+import com.example.EmployeeManagement.Model.Employee;
 import com.example.EmployeeManagement.Model.EmployeePersonal;
 import com.example.EmployeeManagement.Service.EmployeePersonalService;
+import com.example.EmployeeManagement.Service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hrms/employees")
 @AllArgsConstructor
 public class EmployeePersonalController {
-    private EmployeePersonalService employeePersonalService;
+    private EmployeeService employeeService;
 
-    @GetMapping("/personal-details")
-    public ResponseEntity<List<EmployeePersonalDTO>> getAllEmployeePersonal(){
-        List<EmployeePersonalDTO> empDto = employeePersonalService.getAllEmployeesPersonal();
-        return ResponseEntity.ok(empDto);
+    @GetMapping("/employees")
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
+        List<EmployeeDTO> employees = employeeService.getAllEmployee();
+        return ResponseEntity.ok(employees);
     }
 
-
-    @GetMapping("/personal-details/{id}")
-    public ResponseEntity<EmployeePersonalDTO> getEmployeesPersonalById(@PathVariable("id") Long id){
-        EmployeePersonalDTO empDto = employeePersonalService.getEmployeePersonalById(id);
-        return ResponseEntity.ok(empDto);
+    @GetMapping("/employees/{id}/profile")
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long id){
+        EmployeeDTO employee = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
     }
 
-
-    @GetMapping("/{id}/personal")
-    public ResponseEntity<EmployeePersonalDTO> getEmployeesPersonalByEmployeeId(@PathVariable("id") Long id){
-        EmployeePersonalDTO empDto = employeePersonalService.getEmployeePersonalByEmployeeId(id);
-        return ResponseEntity.ok(empDto);
+    @PostMapping("/employees")
+    public ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody Employee employee){
+        EmployeeDTO savedEmployee = employeeService.addEmployee(employee);
+        return ResponseEntity.ok(savedEmployee);
     }
 
-    @PostMapping("/add-personal")
-    public ResponseEntity<EmployeePersonalDTO> addEmployeePersonalDetails(@RequestBody EmployeePersonal employeePersonal){
-        EmployeePersonalDTO empDto = employeePersonalService.addEmployeePersonalDetails(employeePersonal);
-        return ResponseEntity.ok(empDto);
-    }
-
-    @DeleteMapping("/personal-details/{id}")
-    public ResponseEntity<String> deleteEmployeePersonalById(@PathVariable("id") Long id){
-        employeePersonalService.deleteEmployeePersonalById(id);
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") Long id){
+        employeeService.deleteEmployeeById(id);
         return ResponseEntity.ok("Employee deleted successfully");
     }
-
 }
+

@@ -41,11 +41,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
-    @PostMapping("/employees")
-    public ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody Employee employee){
-        EmployeeDTO savedEmployee = employeeService.addEmployee(employee);
-        return ResponseEntity.ok(savedEmployee);
-    }
+
 
     // PUT /api/v1/hrms/employees/{id}
     @PutMapping("/employees/{id}")
