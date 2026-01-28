@@ -1,5 +1,6 @@
 package com.example.hrms_platform_document.service;
 
+import com.example.EmployeeManagement.Exception.EmployeeNotFoundException;
 import com.example.EmployeeManagement.Model.Employee;
 import com.example.hrms_platform_document.util.ChecksumUtil;
 import com.example.EmployeeManagement.Repository.EmployeeRepository;
@@ -38,7 +39,7 @@ public class DocumentService {
 
 
         Employee emp = employeeRepo.findById(employeeId)
-                .orElseThrow(() ->
+                .orElseThrow(() -> new EmployeeNotFoundException(employeeId)
                 );
 
         Document document = new Document();

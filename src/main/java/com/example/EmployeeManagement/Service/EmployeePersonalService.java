@@ -49,6 +49,7 @@ public class EmployeePersonalService {
         return mapToDto(employeePersonal);
     }
 
+    public EmployeePersonalDTO addEmployeePersonalDetails(EmployeePersonal employeePersonal){
         employeePersonalRepository.save(employeePersonal);
         return mapToDto(employeePersonal);
     }
