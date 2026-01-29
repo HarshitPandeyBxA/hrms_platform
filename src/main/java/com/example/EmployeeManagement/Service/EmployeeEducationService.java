@@ -87,7 +87,7 @@ public class EmployeeEducationService {
 
         // Security: ensure this education belongs to this employee
         if (!education.getEmployee().getEmployeeId().equals(employeeId)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedException("Employee is not eligible to modify this data. Contact your admin");
         }
 
         // Partial update — only update what is not null

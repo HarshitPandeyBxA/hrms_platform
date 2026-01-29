@@ -2,10 +2,7 @@ package com.example.EmployeeManagement.Exception.Handler;
 
 
 import com.example.EmployeeManagement.DTO.ApiDto;
-import com.example.EmployeeManagement.Exception.EmployeeEducationNotFoundException;
-import com.example.EmployeeManagement.Exception.EmployeeNotFoundException;
-import com.example.EmployeeManagement.Exception.EmployeePersonalExistsException;
-import com.example.EmployeeManagement.Exception.EmployeePersonalNotFoundException;
+import com.example.EmployeeManagement.Exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,6 +47,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmployeeEducationNotFoundException.class)
     public ResponseEntity<ApiDto> handleEmployeeEducationNotExist(EmployeeEducationNotFoundException ex){
+        ApiDto error = new ApiDto(
+                404,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<ApiDto> handleDataNotFoundException(DataNotFoundException ex){
         ApiDto error = new ApiDto(
                 404,
                 ex.getMessage(),
